@@ -20,7 +20,7 @@ async def read_root(request: Request):
     year_message = "The current year is: 2024"
 
     request_logger = logging.getLogger(__file__)
-    request_logger.info("Request received")
+    request_logger.info(f"Request received for FastAPI Timer App. This is the main page of our application. It provides timer functionality including start, stop, and reset features.")
 
     log_message = "Request received at: %s" % "12:00 PM"
 
