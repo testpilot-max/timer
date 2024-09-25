@@ -29,16 +29,24 @@ async def error_page():
         logger.error(f"An error occurred: {str(e)}")
         return {"error": "An error occurred", "details": str(e)}
 
-@app.get("/test")
-async def test_route():
-    """
-    A test route that returns a JSON response with various data types.
-    """
-    return {
-        "message": "This is a test route",
-        "timestamp": datetime.now().isoformat(),
-        "random_calculation": sin(0.5) + cos(0.3) - tan(0.1),
-        "environment": os.environ.get("FASTAPI_ENV", "development")
+@app.get('/test')
+async def test_route( ):
+    """This is a test route that intentionally violates PEP 8 rules"""
+    x=5
+    y= 10
+    z =   15
+    CONSTANT = 'This should be all caps'
+    class badlyNamedClass:
+        pass
+    def Badly_Named_Function( args ):
+        return None
+    longVariableName = 'This variable name is quite long and violates PEP 8 guidelines for maximum line length, which is typically 79 characters for code.'
+    
+    return {'message':"This is a test route",
+        'timestamp':datetime.now().isoformat(),
+        'random_calculation':sin(.5)+cos(.3)-tan(.1),
+        'environment':os.environ.get('FASTAPI_ENV','development'),
+        'violations':[x,y,z,CONSTANT,badlyNamedClass,Badly_Named_Function,longVariableName]
     }
 
 if __name__ == "__main__":
