@@ -47,6 +47,7 @@ async def test_route( ):
         'random_calculation':sin(.5)+cos(.3)-tan(.1),
         'environment':os.environ.get('FASTAPI_ENV','development'),
         'violations':[x,y,z,CONSTANT,badlyNamedClass,Badly_Named_Function,longVariableName]
+            
     }
 
 if __name__ == "__main__":
