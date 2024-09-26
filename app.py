@@ -11,6 +11,7 @@ templates = Jinja2Templates(directory="templates")
 
 logger = logging.Logger("my_logger")
 
+#teting purpose
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     logger.info("Root page accessed")
