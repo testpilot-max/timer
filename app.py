@@ -16,7 +16,7 @@ async def read_root(request: Request):
     logger.info("Root page accessed")
 
     message = "Welcome! You can start, stop, and reset the timer."
-
+    print("Test Printing")
     year_message = "The current year is: 2024"
 
     request_logger = logging.getLogger(__file__)
