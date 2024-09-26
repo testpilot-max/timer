@@ -4,6 +4,8 @@ This project is a simple online timer application built with FastAPI. It demonst
 
 ## Features
 
+teting
+
 - Web-based timer with start, stop, and reset functionality
 - FastAPI backend
 - HTML/JavaScript frontend
