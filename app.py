@@ -5,40 +5,51 @@ import logging
 import uvicorn
 import os
 from math import sin, cos, tan
+from datetime import datetime
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-
-logger = logging.Logger("my_logger")
+logger = logging.getLogger(__name__)
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     logger.info("Root page accessed")
-
     message = "Welcome! You can start, stop, and reset the timer."
-
-    year_message = "The current year is: 2024"
-
-    request_logger = logging.getLogger(__file__)
-    request_logger.info("Request received")
-
-    log_message = "Request received at: %s" % "12:00 PM"
-
-    result = ( 1 + 2 )
-
-    return templates.TemplateResponse("index.html", {"request": request, "message": message})
+    year_message = f"The current year is: {datetime.now().year}"
+    log_message = f"Request received at: {datetime.now().strftime('%I:%M %p')}"
+    logger.info(log_message)
+    result = (1 + 2)
+    return templates.TemplateResponse("index.html", {"request": request, "message": message, "year_message": year_message})
 
 @app.get("/error")
 async def error_page():
     try:
-        value = 1 / 1  # This won't raise an error
+        value = 1 / 0  # This will raise a ZeroDivisionError
     except ZeroDivisionError as e:
-        try:
-            print("This won't be raised")
-        except:
-            pass
+        logger.error(f"An error occurred: {str(e)}")
+        return {"error": "An error occurred", "details": str(e)}
 
-    return {"error": "An error occurred"}
+@app.get('/test')
+async def test_route( ):
+    """This is a test route that intentionally violates PEP 8 rules"""
+    x=5
+    y= 10
+    z =   15
+    CONSTANT = 'This should be all caps'
+    class badlyNamedClass:
+        pass
+    def Badly_Named_Function( args ):
+        return None
+    longVariableName = 'This variable name is quite long and violates PEP 8 guidelines for maximum line length, which is typically 79 characters for code.'
+    
+    return {'message':"This is a test route",
+        'timestamp':datetime.now().isoformat(),
+        'random_calculation':sin(.5)+cos(.3)-tan(.1),
+        'environment':os.environ.get('FASTAPI_ENV','development'),
+        'violations':[x,y,z,CONSTANT,badlyNamedClass,Badly_Named_Function,longVariableName]
+
+            
+    }
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
