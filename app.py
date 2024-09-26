@@ -28,17 +28,7 @@ async def read_root(request: Request):
 
     return templates.TemplateResponse("index.html", {"request": request, "message": message})
 
-@app.get("/error")
-async def error_page():
-    try:
-        value = 1 / 1  # This won't raise an error
-    except ZeroDivisionError as e:
-        try:
-            print("This won't be raised")
-        except:
-            pass
-
-    return {"error": "An error occurred"}
+}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
