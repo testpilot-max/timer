@@ -14,6 +14,7 @@ logger = logging.Logger("my_logger")
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     logger.info("Root page accessed")
+    print('test printing")
 
     message = "Welcome! You can start, stop, and reset the timer."
 
